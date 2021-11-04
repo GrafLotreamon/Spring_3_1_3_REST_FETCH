@@ -1,7 +1,25 @@
 package web.repository;
 
-import org.springframework.data.repository.CrudRepository;
+
 import web.model.Role;
 
-public interface RoleDao extends CrudRepository<Role, Long> {
-}
+import java.util.List;
+import java.util.Set;
+
+public interface RoleDao {
+    Role getRoleByRole(String role);
+
+    Role getRoleById(Long id);
+
+    List<Role> allRoles();
+
+     void addRole(Role role);
+
+
+     void addRoles(Set<Role> roles);
+
+    }
+
+
+
+

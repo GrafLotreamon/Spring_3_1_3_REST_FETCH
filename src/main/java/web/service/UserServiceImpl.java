@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 import web.repository.UserDao;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -25,46 +23,46 @@ public class UserServiceImpl implements UserService {
     @Override
     public void createUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDao.save(user);
+        userDao.addUser(user);
     }
 
     @Override
     public void updateUser(User user) {
         if (user.getPassword().isEmpty()) {
-            user.setPassword(userDao.findByEmail(user.getEmail()).getPassword());
+            user.setPassword(userDao.getUserByEmail(user.getEmail()).getPassword());
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        userDao.save(user);
+        userDao.update(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userDao.findByEmail(email);
+        return userDao.getUserByEmail(email);
     }
 
     @Override
     public User getUserByEmail(String email) {
-        return userDao.findByEmail(email);
+        return userDao.getUserByEmail(email);
     }
 
     @Override
     public Iterable<User> getAllUsers() {
-        return userDao.findAll();
+        return userDao.getAllUsers();
     }
 
     @Override
-    public void deleteUser(User user) {
-        userDao.delete(user);
+    public void deleteUser(Long id) {
+        userDao.delete(id);
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-        return userDao.findById(id);
+    public User getUserById(Long id) {
+        return userDao.getUserById(id);
     }
 
     @Override
     public void deleteUserById(Long id) {
-        userDao.deleteById(id);
+        userDao.delete(id);
     }
 }

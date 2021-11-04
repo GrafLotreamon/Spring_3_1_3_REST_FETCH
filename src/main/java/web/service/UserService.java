@@ -3,8 +3,6 @@ package web.service;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import web.model.User;
 
-import java.util.Optional;
-
 public interface UserService extends UserDetailsService {
     void createUser(User user);
 
@@ -12,9 +10,9 @@ public interface UserService extends UserDetailsService {
 
     void updateUser(User user);
 
-    void deleteUser(User user);
+    void deleteUser(Long id);
 
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
 
     void deleteUserById(Long id);
 

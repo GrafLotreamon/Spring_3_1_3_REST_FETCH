@@ -9,8 +9,6 @@ import web.model.User;
 import web.service.RoleService;
 import web.service.UserService;
 
-import java.util.Optional;
-
 @RestController
 public class RestAdminController {
     private final UserService userService;
@@ -38,13 +36,13 @@ public class RestAdminController {
     }
 
     @GetMapping("/getUserById/{id}")
-    public ResponseEntity<Optional<User>> getUserById(@PathVariable Long id) {
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUserById(id);
+        userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

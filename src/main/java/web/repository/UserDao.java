@@ -1,13 +1,23 @@
 package web.repository;
 
-import org.springframework.data.repository.CrudRepository;
+
 import web.model.User;
 
-public interface UserDao extends CrudRepository<User, Long> {
-    User findByName(String name);
+import java.util.List;
 
-    User findByEmail(String email);
+public interface UserDao {
 
-    void deleteById(Long id);
+    void addUser(User user);
+
+    void delete(Long id);
+
+    void update(User updatedUser);
+
+    User getUserById(Long id);
+
+    List<User> getAllUsers();
+
+
+    public User getUserByEmail(String email);
+
 }
-

@@ -19,12 +19,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void createRoles(Set<Role> roles) {
-        roleDao.saveAll(roles);
+        roleDao.addRoles(roles);
     }
 
     @Override
     public Set<Role> getAllRoles() {
-        Iterable<Role> iterable = roleDao.findAll();
+        Iterable<Role> iterable = roleDao.allRoles();
         Set<Role> set = new HashSet<>();
         iterable.forEach(role -> set.add(role));
         return set;
